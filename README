@@ -9,7 +9,6 @@ LEFT_DIR_PIN = 4
 RIGHT_GO_PIN = 10
 RIGHT_DIR_PIN = 25
 
-Used Camera class to control cam of robot
-Below GPIOs in BCM mode used. Both GPIOs used as PWM mode to control steering engine
-CAMERA_VERTICAL_CHANNEL = 23
-CAMERA_HORIZONTAL_CHANNEL = 18
+Used cradlecamera class to control cam of robot
+The cradlecamera used I2C to control a driver board to generate PWM
+to control servo of cam

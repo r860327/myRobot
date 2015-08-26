@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 from socket import *
 from time import ctime
-from raspirobotboard import *
+from motor import *
 import sys
 import RPi.GPIO as GPIO
 from cradlecamera import CameraServo
 
-rr = RaspiRobot()
-camera_servo = CameraServo()
+rr = RaspiMotor()
+camera_servo = CameraServo(355, 290)
 
 HOST = ''
 PORT = 20000
@@ -41,13 +41,13 @@ while True:
 		elif data == 'rd':
 			rr.right(0.075)
 		elif data == 'udc':
-			camera_servo.update_pos(CAM_ANGLE_DECREASE, CAM_VERTICAL_DIR, 10)
+			camera_servo.update_pos(CAM_ANGLE_DECREASE, CAM_VERTICAL_DIR, 5)
 		elif data == 'ddc':
-			camera_servo.update_pos(CAM_ANGLE_INCREASE, CAM_VERTICAL_DIR, 10)
+			camera_servo.update_pos(CAM_ANGLE_INCREASE, CAM_VERTICAL_DIR, 5)
 		elif data == 'ldc':
-			camera_servo.update_pos(CAM_ANGLE_INCREASE, CAM_HORIZONTAL_DIR, 10)
+			camera_servo.update_pos(CAM_ANGLE_INCREASE, CAM_HORIZONTAL_DIR, 5)
 		elif data == 'rdc':
-			camera_servo.update_pos(CAM_ANGLE_DECREASE, CAM_HORIZONTAL_DIR, 10)
+			camera_servo.update_pos(CAM_ANGLE_DECREASE, CAM_HORIZONTAL_DIR, 5)
 		else:
 			print 'unknow command'
 	tcpClientSock.close()

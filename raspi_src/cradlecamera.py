@@ -10,15 +10,18 @@ VERTICAL_CHANNEL = 1
 servoMin = 150  # Min pulse length out of 4096
 servoMax = 565  # Max pulse length out of 4096
 
+servoVerticalMin = 150
+servoVerticalMax = 450
+
 START_HORIZONTAL_POS = 355#should be the centre postion of horizontal
 START_VERTICAL_POS = 250    #should be the suitable postion of vertical
 
 class CameraServo:
-    def __init__(self):
+    def __init__(self, default_h_pos = START_HORIZONTAL_POS, default_v_pos = START_VERTICAL_POS):
         self.pwm = PWM(0x6F, debug=True)
         self.pwm.setPWMFreq(50)
-        self.current_horizontal_pos = START_HORIZONTAL_POS
-        self.current_vertical_pos = START_VERTICAL_POS
+        self.current_horizontal_pos = default_h_pos
+        self.current_vertical_pos = default_v_pos
         self.pwm.setPWM(HORIZONTAL_CHANNEL, 0, int(self.current_horizontal_pos))
         self.pwm.setPWM(VERTICAL_CHANNEL, 0, int(self.current_vertical_pos))
 
@@ -37,7 +40,7 @@ class CameraServo:
         if horizontal_pwm < servoMin or horizontal_pwm > servoMax:
             print("invaild horizontal_pwm!")
             return
-        if vertical_pwm < servoMin or vertical_pwm > servoMax:
+        if vertical_pwm < servoVerticalMin or vertical_pwm > servoVerticalMax:
             print("invaild vertical_pwm")
             return
 
@@ -66,10 +69,10 @@ class CameraServo:
                 print("unknow direction!")
         elif x_or_y == 1:
             if direction == 0:
-                if self.current_vertical_pos > servoMin:
+                if self.current_vertical_pos > servoVerticalMin:
                     self.current_vertical_pos = max(self.current_vertical_pos - delta_pwm, servoMin)
             elif direction == 1:
-                if self.current_vertical_pos < servoMax:
+                if self.current_vertical_pos < servoVerticalMax:
                     self.current_vertical_pos = min(self.current_vertical_pos + delta_pwm, servoMax)
             else:
                 print("unknow direction!")

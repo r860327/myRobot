@@ -4,11 +4,17 @@ This project is something about my raspi robot
 
 Used raspirobotboard lib to control motion of robot.
 Below GPIOs in BCM mode used
-LEFT_GO_PIN = 17
-LEFT_DIR_PIN = 4
-RIGHT_GO_PIN = 10
-RIGHT_DIR_PIN = 25
+LEFT_ENABLE_PIN = 4
+LEFT_FORWARD_PIN = 17
+LEFT_REVERSE_PIN = 27
+RIGHT_ENABLE_PIN = 10
+RIGHT_FORWARD_PIN = 11
+RIGHT_REVERSE_PIN = 9
 
 Used cradlecamera class to control cam of robot
 The cradlecamera used I2C to control a driver board to generate PWM
 to control servo of cam
+
+
+Known issue:
+

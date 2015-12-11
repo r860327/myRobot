@@ -18,4 +18,4 @@ to control servo of cam
 
 Known issue:
 
-https://travis-ci.org/r860327/myRobot.svg
+[![Build Status](https://travis-ci.org/r860327/myRobot.svg?branch=master)](https://travis-ci.org/r860327/myRobot)

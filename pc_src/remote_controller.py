@@ -9,6 +9,15 @@ from objc._objc import NULL
 from Tkinter import Frame, LabelFrame
 
 #define callback function for car control
+def keyDown(event):
+    #if event == "ud":
+     #   tcpClientSock.send("ud")
+    print str(event.char)
+    print "============"
+    print carButtonUp
+    if event == carButtonUp:
+        print "press" + str(event) + "down"
+
 def upPressDown(event):
     tcpClientSock.send("ud")
     print "press down"
@@ -153,6 +162,7 @@ print "set tcpClientSock NULL"
 connected = FALSE
 
 top=Tkinter.Tk()
+#initial set title and and size of window
 top.title('Raspi Controler')
 top.geometry("500x300")
 top.resizable(FALSE, FALSE)
@@ -160,6 +170,7 @@ top.resizable(FALSE, FALSE)
 hello = Tkinter.Label(top, text='please control your raspi!',bg='white',fg='blue')
 hello.pack()
 
+#define connection status
 frmControl = Frame()
 frmControl.pack(side=TOP)
 
@@ -176,19 +187,22 @@ frmCar = LabelFrame(frmControl, text='Car controller')
 frmCar.pack(side=LEFT)
 
 
-carButtonUp = Tkinter.Button(frmCar,text="up",bg='blue')
-carButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
+top.bind("<KeyPress-a>", keyDown, "")
+
+carButtonUp = Tkinter.Button(frmCar,text="w",bg='blue')
+carButtonUp.bind('<ButtonRelease-1>', keyDown, "")
+#carButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonUp.pack(side=TOP)
 
-carButtonLeft = Tkinter.Button(frmCar,text="left",bg='green')
+carButtonLeft = Tkinter.Button(frmCar,text="a",bg='green')
 carButtonLeft.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonLeft.pack(side=LEFT)
 
-carButtonRight = Tkinter.Button(frmCar,text="right",bg='blue')
+carButtonRight = Tkinter.Button(frmCar,text="d",bg='blue')
 carButtonRight.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonRight.pack(side=RIGHT)
 
-carButtonDown = Tkinter.Button(frmCar,text="down",bg='blue')
+carButtonDown = Tkinter.Button(frmCar,text="s",bg='blue')
 carButtonDown.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonDown.pack(side=BOTTOM)
 
@@ -200,19 +214,19 @@ frmControlGap.pack(side=LEFT)
 frmCamera = LabelFrame(frmControl, text='Camera controller')
 frmCamera.pack(side=RIGHT)
 
-camButtonUp = Tkinter.Button(frmCamera,text="up",bg='blue')
+camButtonUp = Tkinter.Button(frmCamera,text="i",bg='blue')
 camButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonUp.pack(side=TOP)
 
-camButtonLeft = Tkinter.Button(frmCamera,text="left",bg='green')
+camButtonLeft = Tkinter.Button(frmCamera,text="j",bg='green')
 camButtonLeft.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonLeft.pack(side=LEFT)
 
-camButtonRight = Tkinter.Button(frmCamera,text="right",bg='blue')
+camButtonRight = Tkinter.Button(frmCamera,text="l",bg='blue')
 camButtonRight.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonRight.pack(side=RIGHT)
 
-camButtonDown = Tkinter.Button(frmCamera,text="down",bg='blue')
+camButtonDown = Tkinter.Button(frmCamera,text="k",bg='blue')
 camButtonDown.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonDown.pack(side=BOTTOM)
 

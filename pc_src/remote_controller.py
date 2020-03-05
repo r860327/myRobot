@@ -1,87 +1,87 @@
 #!/usr/bin/env python
-import Tkinter
-import tkMessageBox as Message
-from Tkconstants import *
+import tkinter
+import tkinter.messagebox as Message
+from tkinter.constants import *
 from socket import *
 import sys
 
-from objc._objc import NULL
-from Tkinter import Frame, LabelFrame
+#from objc._objc import NULL
+from tkinter import Frame, LabelFrame
 
 #define callback function for car control
 def keyDown(event):
     #if event == "ud":
      #   tcpClientSock.send("ud")
-    print str(event.char)
-    print "============"
-    print carButtonUp
+    print(str(event.char))
+    print("============")
+    print(carButtonUp)
     if event == carButtonUp:
-        print "press" + str(event) + "down"
+        print("press" + str(event) + "down")
 
 def upPressDown(event):
-    tcpClientSock.send("ud")
-    print "press down"
+    tcpClientSock.send(b"ud")
+    print("go forward key press")
     
 def upPressUp(event):
-    tcpClientSock.send("uu")
-    print "press up"
+    tcpClientSock.send(b"uu")
+    print("go forward key relase")
 
 def leftPressDown(event):
-    tcpClientSock.send("ld")
-    print "press down"
+    tcpClientSock.send(b"ld")
+    print("turn left key press")
      
 def leftPressUp(event):
-    tcpClientSock.send("lu")
-    print "press up"
+    tcpClientSock.send(b"lu")
+    print("turn left key relase")
     
 def rightPressDown(event):
-    tcpClientSock.send("rd")
-    print "press down"
+    tcpClientSock.send(b"rd")
+    print("turn right key press")
      
 def rightPressUp(event):
-    tcpClientSock.send("ru")
-    print "press up"
+    tcpClientSock.send(b"ru")
+    print("turn right key relase")
     
 def downPressDown(event):
-    tcpClientSock.send("dd")
-    print "press down"
+    tcpClientSock.send(b"dd")
+    print("back key press")
      
 def downPressUp(event):
-    tcpClientSock.send("du")
-    print "press up"
+    tcpClientSock.send(b"du")
+    print("back key release")
 
 #define call back function for camera control
 def upPressDownCam(event):
-    tcpClientSock.send("udc")
-    print "press down"
+    tcpClientSock.send(b"udc")
+    print("up key press")
     
 def upPressUpCam(event):
-    tcpClientSock.send("uuc")
-    print "press up"
+    tcpClientSock.send(b"uuc")
+    print("up key release")
 
 def leftPressDownCam(event):
-    tcpClientSock.send("ldc")
-    print "press down"
+    tcpClientSock.send(b"ldc")
+    print("left key press")
      
 def leftPressUpCam(event):
-    tcpClientSock.send("luc")
-    print "press up"
+    tcpClientSock.send(b"luc")
+    print("left key release")
     
 def rightPressDownCam(event):
-    tcpClientSock.send("rdc")
-    print "press down"
+    tcpClientSock.send(b"rdc")
+    print("right key press")
      
 def rightPressUpCam(event):
-    tcpClientSock.send("ruc")
-    print "press up"
+    tcpClientSock.send(b"ruc")
+    print("right key release")
     
 def downPressDownCam(event):
-    tcpClientSock.send("ddc")
-    print "press down"
+    tcpClientSock.send(b"ddc")
+    print("down key press")
      
 def downPressUpCam(event):
-    tcpClientSock.send("duc")
-    print "press up"
+    tcpClientSock.send(b"duc")
+    print("down key release")
 
 #define call back function for not connected raspi
 def popUpMessageBox(event):
@@ -92,15 +92,15 @@ def connectToServer():
     tcpClientSock = socket(AF_INET, SOCK_STREAM)
     tcpClientSock.settimeout(2)
     try:
-        print "IP:"+ipEntry.get()
-        print "port:"+portEntry.get()
-        if (ipEntry.get()==NULL or ipEntry.get()==""):
+        print("IP:"+ipEntry.get())
+        print("port:"+portEntry.get())
+        if (ipEntry.get() is None or ipEntry.get()==""):
             Message.showerror('Contro raspi', 'Please input raspi IP Address!!')
         else:
             ADDR = (ipEntry.get(), int(portEntry.get()))
             tcpClientSock.connect(ADDR)
     except timeout:
-        print "time out exception"
+        print("time out exception")
         tcpClientSock.close()
         Message.showerror('Contro raspi', 'Can not connected to raspi, please retry later!')
     else:
@@ -146,28 +146,28 @@ def connectToServer():
         top.focus_set()
 
 def closeControl():
-    if(tcpClientSock != NULL):
+    if(tcpClientSock is not None):
         tcpClientSock.close()
     top.quit()
 
 
-HOST = '192.168.1.116'
+HOST = '192.168.50.126'
 PORT = 20000
 BUFSIZE = 1024
 ADDR = (HOST, PORT)
 # tcpClientSock = socket(AF_INET, SOCK_STREAM)
-tcpClientSock = NULL
-print "set tcpClientSock NULL"
+tcpClientSock = None
+print("set tcpClientSock NULL")
 
 connected = FALSE
 
-top=Tkinter.Tk()
+top=tkinter.Tk()
 #initial set title and and size of window
 top.title('Raspi Controler')
 top.geometry("500x300")
 top.resizable(FALSE, FALSE)
 
-hello = Tkinter.Label(top, text='please control your raspi!',bg='white',fg='blue')
+hello = tkinter.Label(top, text='please control your raspi!',bg='white',fg='blue')
 hello.pack()
 
 #define connection status
@@ -176,7 +176,7 @@ frmControl.pack(side=TOP)
 
 frmgap = Frame(height=50)
 frmgap.pack(side=TOP)
-connState = Tkinter.Label(frmgap,bg='red', width=2)
+connState = tkinter.Label(frmgap,bg='red', width=5)
 connState.pack()
 
 frmOther = Frame()
@@ -189,44 +189,43 @@ frmCar.pack(side=LEFT)
 
 top.bind("<KeyPress-a>", keyDown, "")
 
-carButtonUp = Tkinter.Button(frmCar,text="w",bg='blue')
-carButtonUp.bind('<ButtonRelease-1>', keyDown, "")
-#carButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
+carButtonUp = tkinter.Button(frmCar,text="w",bg='blue')
+carButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonUp.pack(side=TOP)
 
-carButtonLeft = Tkinter.Button(frmCar,text="a",bg='green')
+carButtonLeft = tkinter.Button(frmCar,text="a",bg='blue')
 carButtonLeft.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonLeft.pack(side=LEFT)
 
-carButtonRight = Tkinter.Button(frmCar,text="d",bg='blue')
+carButtonRight = tkinter.Button(frmCar,text="d",bg='blue')
 carButtonRight.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonRight.pack(side=RIGHT)
 
-carButtonDown = Tkinter.Button(frmCar,text="s",bg='blue')
+carButtonDown = tkinter.Button(frmCar,text="s",bg='blue')
 carButtonDown.bind('<ButtonRelease-1>', popUpMessageBox, "")
 carButtonDown.pack(side=BOTTOM)
 
 #define gap between car and camera control panel
-frmControlGap = Frame(frmControl, width=20)
+frmControlGap = Frame(frmControl, width=50)
 frmControlGap.pack(side=LEFT)
 
 #define camera controller panel
 frmCamera = LabelFrame(frmControl, text='Camera controller')
 frmCamera.pack(side=RIGHT)
 
-camButtonUp = Tkinter.Button(frmCamera,text="i",bg='blue')
+camButtonUp = tkinter.Button(frmCamera,text="i",bg='green')
 camButtonUp.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonUp.pack(side=TOP)
 
-camButtonLeft = Tkinter.Button(frmCamera,text="j",bg='green')
+camButtonLeft = tkinter.Button(frmCamera,text="j",bg='green')
 camButtonLeft.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonLeft.pack(side=LEFT)
 
-camButtonRight = Tkinter.Button(frmCamera,text="l",bg='blue')
+camButtonRight = tkinter.Button(frmCamera,text="l",bg='green')
 camButtonRight.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonRight.pack(side=RIGHT)
 
-camButtonDown = Tkinter.Button(frmCamera,text="k",bg='blue')
+camButtonDown = tkinter.Button(frmCamera,text="k",bg='green')
 camButtonDown.bind('<ButtonRelease-1>', popUpMessageBox, "")
 camButtonDown.pack(side=BOTTOM)
 
@@ -234,20 +233,20 @@ camButtonDown.pack(side=BOTTOM)
 #define connected button
 frmConnect = LabelFrame(frmOther, text='Status')
 frmConnect.pack(side=TOP)
-buttonConnect = Tkinter.Button(frmConnect, text='Connect to server',command=connectToServer, activeforeground='white',activebackground='red')
+buttonConnect = tkinter.Button(frmConnect, text='Connect to server',command=connectToServer, activeforeground='white',activebackground='red')
 buttonConnect.pack(side=LEFT)
 
-varIp = Tkinter.StringVar()
-ipEntry = Tkinter.Entry(frmConnect, textvariable=varIp)
-varIp.set("192.168.1.116")
+varIp = tkinter.StringVar()
+ipEntry = tkinter.Entry(frmConnect, textvariable=varIp)
+varIp.set(HOST)
 ipEntry.pack(side=LEFT)
 
-varPort = Tkinter.StringVar()
-portEntry = Tkinter.Entry(frmConnect, textvariable=varPort, width=5)
-varPort.set("20000")
+varPort = tkinter.StringVar()
+portEntry = tkinter.Entry(frmConnect, textvariable=varPort, width=5)
+varPort.set(PORT)
 portEntry.pack(side=RIGHT)
 
-buttonQuit=Tkinter.Button(top, text='QUIT',command=closeControl, activeforeground='white',activebackground='red')
+buttonQuit=tkinter.Button(top, text='QUIT',command=closeControl, activeforeground='white',activebackground='red')
 buttonQuit.pack(side=BOTTOM)
 
-Tkinter.mainloop()
+tkinter.mainloop()

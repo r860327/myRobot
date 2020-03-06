@@ -19,66 +19,66 @@ def keyDown(event):
         print("press" + str(event) + "down")
 
 def upPressDown(event):
-    tcpClientSock.send(b"ud")
+    tcpClientSock.send(b"ud\n")
     print("go forward key press")
-    
+
 def upPressUp(event):
     tcpClientSock.send(b"uu")
     print("go forward key relase")
 
 def leftPressDown(event):
-    tcpClientSock.send(b"ld")
+    tcpClientSock.send(b"ld\n")
     print("turn left key press")
-     
+
 def leftPressUp(event):
     tcpClientSock.send(b"lu")
     print("turn left key relase")
-    
+
 def rightPressDown(event):
-    tcpClientSock.send(b"rd")
+    tcpClientSock.send(b"rd\n")
     print("turn right key press")
-     
+
 def rightPressUp(event):
     tcpClientSock.send(b"ru")
     print("turn right key relase")
-    
+
 def downPressDown(event):
-    tcpClientSock.send(b"dd")
+    tcpClientSock.send(b"dd\n")
     print("back key press")
-     
+
 def downPressUp(event):
     tcpClientSock.send(b"du")
     print("back key release")
 
 #define call back function for camera control
 def upPressDownCam(event):
-    tcpClientSock.send(b"udc")
+    tcpClientSock.send(b"udc\n")
     print("up key press")
-    
+
 def upPressUpCam(event):
     tcpClientSock.send(b"uuc")
     print("up key release")
 
 def leftPressDownCam(event):
-    tcpClientSock.send(b"ldc")
+    tcpClientSock.send(b"ldc\n")
     print("left key press")
-     
+
 def leftPressUpCam(event):
     tcpClientSock.send(b"luc")
     print("left key release")
-    
+
 def rightPressDownCam(event):
-    tcpClientSock.send(b"rdc")
+    tcpClientSock.send(b"rdc\n")
     print("right key press")
-     
+
 def rightPressUpCam(event):
     tcpClientSock.send(b"ruc")
     print("right key release")
-    
+
 def downPressDownCam(event):
-    tcpClientSock.send(b"ddc")
+    tcpClientSock.send(b"ddc\n")
     print("down key press")
-     
+
 def downPressUpCam(event):
     tcpClientSock.send(b"duc")
     print("down key release")
@@ -86,7 +86,7 @@ def downPressUpCam(event):
 #define call back function for not connected raspi
 def popUpMessageBox(event):
     Message.showerror('Contro raspi', 'Has not connected to raspi!!')
-    
+
 def connectToServer():
     global tcpClientSock
     tcpClientSock = socket(AF_INET, SOCK_STREAM)

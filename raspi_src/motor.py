@@ -36,7 +36,11 @@ class RaspiMotor:
 
         self.ser = None
 
-    def enable_motor(self, left_enable, enable):
+    def enable_motor(self, left_enable, right_enable):
+        """
+        Independently gate the left/right enable pins instead of
+        unintentionally reusing an undefined value.
+        """
         GPIO.output(LEFT_ENABLE_PIN, left_enable)
         GPIO.output(RIGHT_ENABLE_PIN, right_enable)
 

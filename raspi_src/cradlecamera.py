@@ -48,7 +48,7 @@ class CameraServo:
         print("set vertical to: %s " % vertical_pwm)
 
         self.pwm.setPWM(HORIZONTAL_CHANNEL, 0, int(horizontal_pwm))
-        self.pwm.setPWM(VERTICAL_CHANNEL, 0, int(vertical_pos))
+        self.pwm.setPWM(VERTICAL_CHANNEL, 0, int(vertical_pwm))
 
     def update_pos(self, direction, x_or_y, delta_angle):
         '''
@@ -70,10 +70,10 @@ class CameraServo:
         elif x_or_y == 1:
             if direction == 0:
                 if self.current_vertical_pos > servoVerticalMin:
-                    self.current_vertical_pos = max(self.current_vertical_pos - delta_pwm, servoMin)
+                    self.current_vertical_pos = max(self.current_vertical_pos - delta_pwm, servoVerticalMin)
             elif direction == 1:
                 if self.current_vertical_pos < servoVerticalMax:
-                    self.current_vertical_pos = min(self.current_vertical_pos + delta_pwm, servoMax)
+                    self.current_vertical_pos = min(self.current_vertical_pos + delta_pwm, servoVerticalMax)
             else:
                 print("unknow direction!")
         else:
